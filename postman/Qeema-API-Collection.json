@@ -210,7 +210,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"newstudent@example.com\",\n  \"password\": \"Student123!\",\n  \"fullName\": \"New Student\",\n  \"className\": \"Grade 10-A\",\n  \"academicYear\": \"2023-2024\",\n  \"phoneNumber\": \"+20 123 456 7890\"\n}"
+              "raw": "{\n  \"email\": \"newstudent@example.com\",\n  \"password\": \"Student123!\",\n  \"fullName\": \"New Student\",\n  \"className\": \"Grade 10-A\",\n  \"academicYear\": \"2025-2026\",\n  \"phoneNumber\": \"+20 123 456 7890\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/students",
@@ -335,7 +335,7 @@
               "host": ["{{baseUrl}}"],
               "path": ["lessons", "{{lessonId}}"]
             },
-            "description": "Get lesson details"
+            "description": "Get lesson details (includes user's rating and favorite status)"
           }
         },
         {
@@ -354,14 +354,14 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"New Lesson Title\",\n  \"description\": \"This is a comprehensive lesson description that explains what students will learn.\",\n  \"imageUrl\": \"https://placehold.co/400x300/3b82f6/white?text=NewLesson\",\n  \"rating\": 4.5\n}"
+              "raw": "{\n  \"title\": \"New Lesson Title\",\n  \"description\": \"This is a comprehensive lesson description that explains what students will learn.\",\n  \"imageUrl\": \"https://placehold.co/400x300/3b82f6/white?text=NewLesson\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/lessons",
               "host": ["{{baseUrl}}"],
               "path": ["lessons"]
             },
-            "description": "Create new lesson (Admin only)"
+            "description": "Create new lesson (Admin only). Rating starts at 0 and is updated by student ratings."
           }
         },
         {
@@ -380,7 +380,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Updated Lesson Title\",\n  \"rating\": 4.8\n}"
+              "raw": "{\n  \"title\": \"Updated Lesson Title\",\n  \"description\": \"Updated description\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/lessons/{{lessonId}}",
@@ -406,6 +406,55 @@
               "path": ["lessons", "{{lessonId}}"]
             },
             "description": "Delete lesson (Admin only)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ratings (Student)",
+      "item": [
+        {
+          "name": "Rate a Lesson",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": 5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/lessons/{{lessonId}}/rate",
+              "host": ["{{baseUrl}}"],
+              "path": ["lessons", "{{lessonId}}", "rate"]
+            },
+            "description": "Rate a lesson (1-5 stars). Creates or updates the user's rating."
+          }
+        },
+        {
+          "name": "Get My Rating for Lesson",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/lessons/{{lessonId}}/my-rating",
+              "host": ["{{baseUrl}}"],
+              "path": ["lessons", "{{lessonId}}", "my-rating"]
+            },
+            "description": "Get current user's rating for a specific lesson"
           }
         }
       ]
@@ -465,6 +514,39 @@
               "path": ["favorites", "{{lessonId}}"]
             },
             "description": "Remove lesson from favorites (Student only)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Upload",
+      "item": [
+        {
+          "name": "Upload Image",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/upload",
+              "host": ["{{baseUrl}}"],
+              "path": ["upload"]
+            },
+            "description": "Upload an image to Cloudinary. Accepts JPEG, PNG, GIF, WebP. Max 5MB. Returns the image URL."
           }
         }
       ]
@@ -560,4 +642,3 @@
     }
   ]
 }
-
