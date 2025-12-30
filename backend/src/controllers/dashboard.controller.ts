@@ -25,5 +25,22 @@ export const dashboardController = {
       next(error);
     }
   },
+
+  /**
+   * GET /api/dashboard/analytics
+   * Get detailed analytics for dashboard charts (admin only)
+   */
+  async getAnalytics(
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const analytics = await dashboardService.getAnalytics();
+      sendSuccess(res, analytics);
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 

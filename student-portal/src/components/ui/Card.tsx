@@ -28,7 +28,8 @@ export default function Card({
   return (
     <div
       className={`
-        bg-white rounded-xl border border-secondary-100 shadow-sm
+        bg-white dark:bg-secondary-800 rounded-xl border border-secondary-100 dark:border-secondary-700 shadow-sm
+        transition-colors duration-300
         ${paddingStyles[padding]}
         ${hover ? 'card-hover cursor-pointer' : ''}
         ${className}
@@ -48,7 +49,7 @@ Card.Header = function CardHeader({
   className?: string;
 }) {
   return (
-    <div className={`border-b border-secondary-100 pb-4 mb-4 ${className}`}>
+    <div className={`border-b border-secondary-100 dark:border-secondary-700 pb-4 mb-4 ${className}`}>
       {children}
     </div>
   );
@@ -72,7 +73,7 @@ Card.Footer = function CardFooter({
   className?: string;
 }) {
   return (
-    <div className={`border-t border-secondary-100 pt-4 mt-4 ${className}`}>
+    <div className={`border-t border-secondary-100 dark:border-secondary-700 pt-4 mt-4 ${className}`}>
       {children}
     </div>
   );

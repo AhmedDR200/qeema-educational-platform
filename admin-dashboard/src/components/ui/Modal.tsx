@@ -72,16 +72,16 @@ export default function Modal({
         ref={modalRef}
         tabIndex={-1}
         className={`
-          relative bg-white rounded-xl shadow-xl w-full ${sizeStyles[size]}
-          animate-slide-up
+          relative bg-white dark:bg-secondary-800 rounded-xl shadow-xl w-full ${sizeStyles[size]}
+          animate-slide-up transition-colors duration-300
         `}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-secondary-100">
-          <h2 className="text-lg font-semibold text-secondary-900">{title}</h2>
+        <div className="flex items-center justify-between p-6 border-b border-secondary-100 dark:border-secondary-700">
+          <h2 className="text-lg font-semibold text-secondary-900 dark:text-white">{title}</h2>
           <button
             onClick={onClose}
-            className="text-secondary-400 hover:text-secondary-600 transition-colors font-medium text-sm px-2 py-1 rounded hover:bg-secondary-100"
+            className="text-secondary-400 dark:text-secondary-500 hover:text-secondary-600 dark:hover:text-secondary-300 transition-colors font-medium text-sm px-2 py-1 rounded hover:bg-secondary-100 dark:hover:bg-secondary-700"
           >
             Close
           </button>
@@ -92,7 +92,7 @@ export default function Modal({
 
         {/* Footer */}
         {footer && (
-          <div className="flex items-center justify-end gap-3 p-6 border-t border-secondary-100 bg-secondary-50 rounded-b-xl">
+          <div className="flex items-center justify-end gap-3 p-6 border-t border-secondary-100 dark:border-secondary-700 bg-secondary-50 dark:bg-secondary-900/50 rounded-b-xl">
             {footer}
           </div>
         )}
@@ -144,7 +144,7 @@ export function ConfirmModal({
         </>
       }
     >
-      <p className="text-secondary-600">{message}</p>
+      <p className="text-secondary-600 dark:text-secondary-300">{message}</p>
     </Modal>
   );
 }

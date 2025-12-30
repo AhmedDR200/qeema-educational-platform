@@ -10,6 +10,8 @@
   
   body {
     @apply bg-secondary-50 text-secondary-900 font-sans antialiased;
+    @apply dark:bg-secondary-900 dark:text-secondary-100;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   /* Custom scrollbar */
@@ -18,15 +20,15 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-secondary-100;
+    @apply bg-secondary-100 dark:bg-secondary-800;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-secondary-300 rounded-full;
+    @apply bg-secondary-300 dark:bg-secondary-600 rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-secondary-400;
+    @apply bg-secondary-400 dark:bg-secondary-500;
   }
 }
 

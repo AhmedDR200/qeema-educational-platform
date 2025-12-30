@@ -19,5 +19,11 @@ router.use(adminOnly);
  */
 router.get('/stats', dashboardController.getStats);
 
+/**
+ * GET /api/dashboard/analytics
+ * Get detailed analytics for charts
+ */
+router.get('/analytics', dashboardController.getAnalytics);
+
 export default router;
 
