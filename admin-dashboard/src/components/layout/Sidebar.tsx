@@ -37,23 +37,23 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       <aside
         className={`
           fixed lg:static inset-y-0 left-0 z-50
-          w-64 bg-white dark:bg-secondary-800 border-r border-secondary-100 dark:border-secondary-700
-          transform transition-all duration-300 ease-in-out
+          w-64 bg-white border-r border-secondary-100
+          transform transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="p-6 border-b border-secondary-100 dark:border-secondary-700">
+          <div className="p-6 border-b border-secondary-100">
             <Link to="/dashboard" className="flex items-center gap-3">
               <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
                 <span className="text-white font-bold text-lg">Q</span>
               </span>
               <div>
-                <span className="font-semibold text-secondary-900 dark:text-white block">
+                <span className="font-semibold text-secondary-900 block">
                   Qeema Admin
                 </span>
-                <span className="text-xs text-secondary-500 dark:text-secondary-400">Dashboard</span>
+                <span className="text-xs text-secondary-500">Dashboard</span>
               </div>
             </Link>
           </div>
@@ -71,8 +71,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                     block px-4 py-3 rounded-lg transition-all duration-200
                     ${
                       isActive
-                        ? 'bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300'
-                        : 'text-secondary-600 dark:text-secondary-300 hover:bg-secondary-50 dark:hover:bg-secondary-700 hover:text-secondary-900 dark:hover:text-white'
+                        ? 'bg-primary-50 text-primary-700'
+                        : 'text-secondary-600 hover:bg-secondary-50 hover:text-secondary-900'
                     }
                   `}
                 >
@@ -81,7 +81,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   </span>
                   <span
                     className={`block text-xs mt-0.5 ${
-                      isActive ? 'text-primary-600 dark:text-primary-400' : 'text-secondary-400 dark:text-secondary-500'
+                      isActive ? 'text-primary-600' : 'text-secondary-400'
                     }`}
                   >
                     {link.description}
@@ -92,16 +92,16 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           </nav>
 
           {/* User section */}
-          <div className="p-4 border-t border-secondary-100 dark:border-secondary-700">
-            <div className="px-4 py-3 bg-secondary-50 dark:bg-secondary-700 rounded-lg mb-3">
-              <p className="text-sm font-medium text-secondary-900 dark:text-white truncate">
+          <div className="p-4 border-t border-secondary-100">
+            <div className="px-4 py-3 bg-secondary-50 rounded-lg mb-3">
+              <p className="text-sm font-medium text-secondary-900 truncate">
                 {user?.email}
               </p>
-              <p className="text-xs text-secondary-500 dark:text-secondary-400">Administrator</p>
+              <p className="text-xs text-secondary-500">Administrator</p>
             </div>
             <button
               onClick={logout}
-              className="w-full px-4 py-2 text-sm font-medium text-secondary-600 dark:text-secondary-300 hover:text-secondary-900 dark:hover:text-white hover:bg-secondary-100 dark:hover:bg-secondary-700 rounded-lg transition-colors text-left"
+              className="w-full px-4 py-2 text-sm font-medium text-secondary-600 hover:text-secondary-900 hover:bg-secondary-100 rounded-lg transition-colors text-left"
             >
               Sign Out
             </button>
@@ -111,4 +111,3 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     </>
   );
 }
-

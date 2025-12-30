@@ -49,11 +49,11 @@ function StatCard({ title, value, description, color }: StatCardProps) {
       />
 
       <div className="relative">
-        <p className="text-sm font-medium text-secondary-500 dark:text-secondary-400 mb-1">{title}</p>
-        <p className="text-4xl font-bold text-secondary-900 dark:text-white mb-2">
+        <p className="text-sm font-medium text-secondary-500 mb-1">{title}</p>
+        <p className="text-4xl font-bold text-secondary-900 mb-2">
           {value.toLocaleString()}
         </p>
-        <p className="text-sm text-secondary-400 dark:text-secondary-500">{description}</p>
+        <p className="text-sm text-secondary-400">{description}</p>
       </div>
 
       {/* Accent bar */}
@@ -109,10 +109,10 @@ export default function DashboardPage() {
   return (
     <div className="animate-fade-in">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-secondary-900 dark:text-white mb-2">
+        <h1 className="text-2xl font-bold text-secondary-900 mb-2">
           Welcome to Dashboard
         </h1>
-        <p className="text-secondary-500 dark:text-secondary-400">
+        <p className="text-secondary-500">
           Here's an overview of your school's statistics
         </p>
       </div>
@@ -167,13 +167,13 @@ export default function DashboardPage() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                 {/* Student Growth Chart */}
                 <Card>
-                  <h3 className="text-lg font-semibold text-secondary-900 dark:text-white mb-4">
+                  <h3 className="text-lg font-semibold text-secondary-900 mb-4">
                     Student Registrations (Last 7 Days)
                   </h3>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={analytics.studentGrowth}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-secondary-700" />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                         <XAxis
                           dataKey="date"
                           tickFormatter={formatDate}
@@ -205,13 +205,13 @@ export default function DashboardPage() {
 
                 {/* Rating Distribution Chart */}
                 <Card>
-                  <h3 className="text-lg font-semibold text-secondary-900 dark:text-white mb-4">
+                  <h3 className="text-lg font-semibold text-secondary-900 mb-4">
                     Lessons by Rating
                   </h3>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={analytics.ratingDistribution}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-secondary-700" />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                         <XAxis
                           dataKey="rating"
                           stroke="#94a3b8"
@@ -242,7 +242,7 @@ export default function DashboardPage() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Top Favorited Lessons */}
                 <Card>
-                  <h3 className="text-lg font-semibold text-secondary-900 dark:text-white mb-4">
+                  <h3 className="text-lg font-semibold text-secondary-900 mb-4">
                     Top Favorited Lessons
                   </h3>
                   {analytics.topFavoritedLessons.length > 0 ? (
@@ -253,24 +253,24 @@ export default function DashboardPage() {
                             {index + 1}
                           </span>
                           <div className="flex-1 min-w-0">
-                            <p className="font-medium text-secondary-900 dark:text-white truncate">
+                            <p className="font-medium text-secondary-900 truncate">
                               {lesson.title}
                             </p>
-                            <p className="text-sm text-secondary-500 dark:text-secondary-400">
+                            <p className="text-sm text-secondary-500">
                               Rating: {lesson.rating.toFixed(1)} / 5
                             </p>
                           </div>
                           <div className="text-right">
-                            <p className="text-lg font-bold text-primary-600 dark:text-primary-400">
+                            <p className="text-lg font-bold text-primary-600">
                               {lesson.favoriteCount}
                             </p>
-                            <p className="text-xs text-secondary-400 dark:text-secondary-500">favorites</p>
+                            <p className="text-xs text-secondary-400">favorites</p>
                           </div>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <p className="text-secondary-500 dark:text-secondary-400 text-center py-8">
+                    <p className="text-secondary-500 text-center py-8">
                       No lessons have been favorited yet
                     </p>
                   )}
@@ -278,7 +278,7 @@ export default function DashboardPage() {
 
                 {/* Recent Students */}
                 <Card>
-                  <h3 className="text-lg font-semibold text-secondary-900 dark:text-white mb-4">
+                  <h3 className="text-lg font-semibold text-secondary-900 mb-4">
                     Recent Students
                   </h3>
                   {analytics.recentStudents.length > 0 ? (
@@ -289,19 +289,19 @@ export default function DashboardPage() {
                             {student.fullName.charAt(0).toUpperCase()}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="font-medium text-secondary-900 dark:text-white truncate">
+                            <p className="font-medium text-secondary-900 truncate">
                               {student.fullName}
                             </p>
-                            <p className="text-sm text-secondary-500 dark:text-secondary-400 truncate">
+                            <p className="text-sm text-secondary-500 truncate">
                               {student.email}
                             </p>
                           </div>
                           <div className="text-right">
-                            <p className="text-sm text-secondary-400 dark:text-secondary-500">
+                            <p className="text-sm text-secondary-400">
                               {new Date(student.createdAt).toLocaleDateString()}
                             </p>
                             {student.className && (
-                              <p className="text-xs text-secondary-500 dark:text-secondary-400">
+                              <p className="text-xs text-secondary-500">
                                 {student.className}
                               </p>
                             )}
@@ -310,7 +310,7 @@ export default function DashboardPage() {
                       ))}
                     </div>
                   ) : (
-                    <p className="text-secondary-500 dark:text-secondary-400 text-center py-8">
+                    <p className="text-secondary-500 text-center py-8">
                       No students registered yet
                     </p>
                   )}

@@ -12,7 +12,7 @@ export default function MainLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-secondary-50 dark:bg-secondary-900 flex transition-colors duration-300">
+    <div className="min-h-screen bg-secondary-50 flex">
       <Sidebar
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
@@ -25,8 +25,8 @@ export default function MainLayout() {
           <Outlet />
         </main>
 
-        <footer className="border-t border-secondary-100 dark:border-secondary-700 bg-white/50 dark:bg-secondary-800/50 py-4 px-6 transition-colors duration-300">
-          <p className="text-sm text-secondary-500 dark:text-secondary-400 text-center">
+        <footer className="border-t border-secondary-100 bg-white/50 py-4 px-6">
+          <p className="text-sm text-secondary-500 text-center">
             Qeema Academy Admin Dashboard v1.0
           </p>
         </footer>
