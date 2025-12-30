@@ -148,9 +148,9 @@ JWT_EXPIRES_IN=24h
 CORS_ORIGIN=http://localhost:5173,http://localhost:5174
 
 # Cloudinary (Image Upload)
-CLOUDINARY_CLOUD_NAME=your-cloud-name
-CLOUDINARY_API_KEY=your-api-key
-CLOUDINARY_API_SECRET=your-api-secret
+CLOUDINARY_CLOUD_NAME=dteulnfyy
+CLOUDINARY_API_KEY=354735196325544
+CLOUDINARY_API_SECRET=m0QN9ct1FTUB8ELTiRPoJn0FvNU
 ```
 
 ### Frontend (`student-portal/.env` & `admin-dashboard/.env`)
