@@ -1,0 +1,126 @@
+// Prisma Schema for Mini Educational Platform
+// This schema defines all database models and their relationships
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// Role enum for user authorization
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+// User model - handles authentication for both students and admins
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String   // Hashed with bcrypt
+  role      Role     @default(STUDENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // One-to-one relation with Student (only if role is STUDENT)
+  student Student?
+
+  @@index([email])
+  @@map("users")
+}
+
+// Student model - stores student profile information
+model Student {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  fullName        String
+  className       String?  // e.g., "Grade 10-A"
+  academicYear    String?  // e.g., "2023-2024"
+  phoneNumber     String?
+  profileImageUrl String?  @db.Text // URL or base64 data URL to profile image
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  favorites Favorite[]
+  ratings   Rating[]
+
+  @@index([userId])
+  @@index([fullName])
+  @@map("students")
+}
+
+// Lesson model - educational content
+model Lesson {
+  id          String  @id @default(uuid())
+  title       String
+  description String  @db.Text // Supports longer descriptions
+  imageUrl    String? @db.Text // URL or base64 data URL to lesson cover image
+  rating      Float   @default(0) // Average rating from 0 to 5
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  favorites Favorite[]
+  ratings   Rating[]
+
+  @@index([title])
+  @@map("lessons")
+}
+
+// Rating model - individual student ratings for lessons
+model Rating {
+  id        String   @id @default(uuid())
+  studentId String
+  lessonId  String
+  value     Int      // Rating value from 1 to 5
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  lesson  Lesson  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  // A student can only rate a lesson once
+  @@unique([studentId, lessonId])
+  @@index([studentId])
+  @@index([lessonId])
+  @@map("ratings")
+}
+
+// Favorite model - junction table for student-lesson favorites
+model Favorite {
+  id        String   @id @default(uuid())
+  studentId String
+  lessonId  String
+  createdAt DateTime @default(now())
+
+  // Relations
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  lesson  Lesson  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  // Composite unique constraint - a student can only favorite a lesson once
+  @@unique([studentId, lessonId])
+  @@index([studentId])
+  @@index([lessonId])
+  @@map("favorites")
+}
+
+// School model - singleton table for school profile
+model School {
+  id          String   @id @default(uuid())
+  name        String
+  logoUrl     String?  // URL to school logo
+  phoneNumber String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("school")
+}
+
