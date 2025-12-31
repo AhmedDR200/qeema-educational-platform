@@ -148,9 +148,9 @@ JWT_EXPIRES_IN=24h
 CORS_ORIGIN=http://localhost:5173,http://localhost:5174
 
 # Cloudinary (Image Upload)
-CLOUDINARY_CLOUD_NAME=dteulnfyy
-CLOUDINARY_API_KEY=354735196325544
-CLOUDINARY_API_SECRET=m0QN9ct1FTUB8ELTiRPoJn0FvNU
+CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
+CLOUDINARY_API_KEY=your-cloudinary-api-key
+CLOUDINARY_API_SECRET=your-cloudinary-api-secret
 ```
 
 ### Frontend (`student-portal/.env` & `admin-dashboard/.env`)
@@ -390,7 +390,3 @@ model School {
 ## 📄 License
 
 This project is licensed under the MIT License.
-
----
-
-Built with ❤️ for the Qeema Task Assessment
